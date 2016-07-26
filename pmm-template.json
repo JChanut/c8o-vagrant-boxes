@@ -1,0 +1,66 @@
+{
+    "builders": [{
+        "name": "ddsim-pmm-ubuntu-14.04.2",
+        "type": "virtualbox-iso",
+        "guest_os_type": "Ubuntu_64",
+        "iso_url": "http://old-releases.ubuntu.com/releases/14.04.2/ubuntu-14.04.2-server-amd64.iso",
+        "iso_checksum": "83aabd8dcf1e8f469f3c72fff2375195",
+        "iso_checksum_type": "md5",
+        "ssh_username": "vagrant",
+        "ssh_password": "vagrant",
+        "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+        "http_directory": "http/ubuntu",
+        "headless": false,
+		"boot_wait": "10s",
+        "ssh_timeout": "10m",
+        "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+        "virtualbox_version_file": ".vbox_version",
+        "hard_drive_interface": "sata",
+        "vboxmanage": [
+            ["modifyvm", "{{.Name}}", "--memory", "384"],
+            ["modifyvm", "{{.Name}}", "--cpus", "2"]
+        ],
+		"boot_command": [
+            "<esc><esc><enter><wait>",
+			"/install/vmlinuz ",
+			"preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
+			"debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+			"hostname={{.Name}} ",
+			"fb=false debconf/frontend=noninteractive ",
+			"keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+			"keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+			"initrd=/install/initrd.gz -- <enter>"
+            ]
+    }],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "floppy",
+            "destination": "/tmp"    
+        },
+        {
+            "environment_vars": [
+                "http_proxy=http://{{user `hostname`}}:3128",
+                "https_proxy=http://{{user `hostname`}}:3128",
+                "no_proxy=localhost,127.0.0.1"
+            ],
+            "type": "shell",
+            "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+            "scripts": [
+                "scripts/sshd.sh",
+                "scripts/vagrant.sh",
+                "scripts/vboxguest.sh",
+                "scripts/mkdir.sh",
+                "scripts/couchdb.sh",
+                "scripts/convertigo.sh"
+                ]
+        }
+    ],
+    "post-processors": [{
+        "type": "vagrant",
+        "output": "builds/{{.BuildName}}_{{.Provider}}.box"
+    }],
+    "variables": {
+        "hostname": "{{env `HOSTNAME`}}"
+    }
+}

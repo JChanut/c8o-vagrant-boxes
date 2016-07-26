@@ -1,0 +1,15 @@
+{
+  "name": "ddsim-pmm/ubuntu-14.04.2",
+  "description": "pmm official box with ubuntu 14.04.2, Couchdb 1.6.1 and Convertigo 7.4",
+  "versions": [
+    {
+      "version": "0.1.0",
+      "providers": [
+        {
+          "name": "virtualbox",
+          "url": "builds/ddsim-pmm-ubuntu-14.04.2_virtualbox.box"
+        }
+      ]
+    }
+  ]
+}
