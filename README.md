@@ -28,8 +28,42 @@ Before building the box, you need some prerequisites:
 
 How to build the Vagrant box
 ----------------------------
-Once you have clone the git repo and installed Packer, launch the builds with the following command:
+Once you have clone the git repo and install Packer, launch the builds with the following command:
 ```sh
 $ packer build pmm-template.json
 ```
 > It will build the 2 boxes in the `build` directory
+
+Testing the boxes locally
+-------------------------
+In order to test the 2 new boxes, you can launch the following script:
+```sh
+$ packer build pmm-template.json
+```
+> It will adding the boxes to Vagrant and starting them with the `Vagrantfile` at the root of the repo
+
+Share the box to all pmm developpers
+------------------------------------
+Now, you must share the box to all the pmm developpers by simply deploying the boxes to the following web server:
+
+`http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/`
+
+To deploy the box on the http server, connect with winscp to the `10.105.132.141` machine with `jbossosmv` user and place the box file
+in the following directory:
+
+`/applis/jboss_as7/POC/config/standalone/deployments/ROOT.war/docs-caasm/pmm-vagrant-boxes`
+
+All pmm developpers can now create Vagrant environment for their projects by using the following configuration 
+in their `Vagrantfile`:
+
+```ruby
+Vagrant.configure(2) do |config|
+    # Use the following config for the Ubuntu 12.04 box
+    config.vm.box = "ddsim-pmm/ubuntu-12.04.4"
+    config.vm.box_url = "http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/ddsim-pmm-ubuntu-12.04.4_virtualbox.box"
+
+    # Use the following config for the Ubuntu 14.04 box
+    config.vm.box = "ddsim-pmm/ubuntu-14.04.2"
+    config.vm.box_url = "http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/ddsim-pmm-ubuntu-14.04.2_virtualbox.box"
+end
+```
