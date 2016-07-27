@@ -6,12 +6,19 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  config.vm.box = "ddsim-pmm/ubuntu-14.04.2"
-
   config.vbguest.auto_update = false
 
-  config.vm.network "forwarded_port", guest: 5984, host: 5984
-  config.vm.network "forwarded_port", guest: 28080, host: 28080
+  config.vm.define "precise" do |precise|
+    precise.vm.box = "ddsim-pmm/ubuntu-12.04.4"
+    precise.vm.network "forwarded_port", guest: 5984, host: 5984
+    precise.vm.network "forwarded_port", guest: 28080, host: 28080
+  end
+
+  config.vm.define "trusty" do |trusty|
+    trusty.vm.box = "ddsim-pmm/ubuntu-14.04.2"
+    trusty.vm.network "forwarded_port", guest: 5984, host: 5985
+    trusty.vm.network "forwarded_port", guest: 28080, host: 28081
+  end
 
   if Vagrant.has_plugin?("vagrant-proxyconf")
     config.proxy.http     = "http://#{`hostname`[0..-2]}:3128"

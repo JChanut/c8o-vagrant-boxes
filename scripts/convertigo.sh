@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 C8O_INSTALL=convertigo-server-7.4.0-v41819-linux32.run
 C8O_PATH=/moteurs/convertigo
 C8O_HOME=/applis/convertigo
@@ -6,9 +6,16 @@ C8O_USER=convertigoMobilityPlatform
 C8O_INIT=/etc/init.d/convertigoMobilityPlatform
 C8O_WEBAPP=$C8O_PATH/tomcat/webapps/convertigo
 
-echo 'Installing Convertigo Dependencies for Ubuntu 14.04'
+#Testing Ubuntu major version for installing the rights Convertigo dependencies
+major_version="`lsb_release -r | awk '{print $2}' | awk -F. '{print $1}'`";
 
-apt-get install -y lib32z1 libgtk2.0-0 libstdc++6:i386 libxft2:i386 libxt6:i386 libxtst6:i386
+if [ ! -z "$major_version" -a "$major_version" -eq 12 ]; then
+    echo 'Installing Convertigo Dependencies for Ubuntu 12.04'
+    apt-get install -y libgtk2.0-0 libxt6 libxtst6 ia32-libs
+else
+    echo 'Installing Convertigo Dependencies for Ubuntu 14.04'
+    apt-get install -y lib32z1 libgtk2.0-0 libstdc++6:i386 libxft2:i386 libxt6:i386 libxtst6:i386
+fi
 
 echo 'Downloading Convertigo installation package 7.4'
 wget -q http://10.105.132.141:8080/docs-caasm/$C8O_INSTALL.zip

@@ -5,21 +5,34 @@ CDB_DATA=/data01/couchdb
 CDB_LOG=/logs/couchdb
 
 echo
-echo 'Installing CouchDB Dependencies for Ubuntu 14.04'
+echo 'Installing CouchDB Dependencies for Ubuntu'
 apt-get install -y erlang-dev erlang-manpages erlang-base-hipe erlang-eunit erlang-nox erlang-xmerl erlang-inets
 apt-get install -y libmozjs185-dev libicu-dev libcurl4-gnutls-dev libtool libcurl3
 
+#Testing Ubuntu major version for installing the rights couchdb binaries
+major_version="`lsb_release -r | awk '{print $2}' | awk -F. '{print $1}'`";
+
+if [ ! -z "$major_version" -a "$major_version" -eq 12 ]; then
+    cdb_common_package=couchdb-common_1.6.1-0ubuntu1_all.deb
+	cdb_bin_package=couchdb-bin_1.6.1-0ubuntu1_amd64.deb
+	cdb_package=couchdb_1.6.1-0ubuntu1_all.deb
+else
+    cdb_common_package=couchdb-common_1.6.1-0ubuntu5_all.deb
+	cdb_bin_package=couchdb-bin_1.6.1-0ubuntu5_amd64.deb
+	cdb_package=couchdb_1.6.1-0ubuntu5_all.deb
+fi
+
 echo
 echo 'Downloading couchdb packages'
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb/couchdb-common_1.6.1-0ubuntu5_all.deb
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb/couchdb-bin_1.6.1-0ubuntu5_amd64.deb
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb/couchdb_1.6.1-0ubuntu5_all.deb
+wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_common_package
+wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_bin_package
+wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_package
 
 echo
 echo 'Installing CouchDB'
-dpkg -i couchdb-common_1.6.1-0ubuntu5_all.deb
-dpkg -i couchdb-bin_1.6.1-0ubuntu5_amd64.deb
-dpkg -i couchdb_1.6.1-0ubuntu5_all.deb
+dpkg -i $cdb_common_package
+dpkg -i $cdb_bin_package
+dpkg -i $cdb_package
 
 echo
 echo 'Configuring CouchDB'
