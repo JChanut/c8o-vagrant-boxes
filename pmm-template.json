@@ -99,9 +99,9 @@
         },
         {
             "environment_vars": [
-                "http_proxy=http://{{user `hostname`}}:3128",
-                "https_proxy=http://{{user `hostname`}}:3128",
-                "no_proxy=localhost,127.0.0.1"
+                "http_proxy={{user `http_proxy`}}",
+                "https_proxy={{user `https_proxy`}}",
+                "no_proxy={{user `no_proxy`}}"
             ],
             "type": "shell",
             "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
@@ -121,6 +121,9 @@
     }],
     "variables": {
         "hostname": "{{env `HOSTNAME`}}",
-        "headless": ""
+        "headless": "",
+        "http_proxy": "{{env `http_proxy`}}",
+        "https_proxy": "{{env `https_proxy`}}",
+        "no_proxy": "{{env `no_proxy`}}"
     }
 }

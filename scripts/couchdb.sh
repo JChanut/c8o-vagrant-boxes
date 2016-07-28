@@ -24,9 +24,9 @@ fi
 
 echo
 echo 'Downloading couchdb packages'
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_common_package
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_bin_package
-wget -q http://10.105.132.141:8080/docs-caasm/couchdb-packages/$cdb_package
+wget -q https://launchpad.net/~couchdb/+archive/ubuntu/stable/+files/$cdb_common_package
+wget -q https://launchpad.net/~couchdb/+archive/ubuntu/stable/+files/$cdb_bin_package
+wget -q https://launchpad.net/~couchdb/+archive/ubuntu/stable/+files//$cdb_package
 
 echo
 echo 'Installing CouchDB'

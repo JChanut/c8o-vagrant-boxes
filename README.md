@@ -1,9 +1,7 @@
-ddsim-pmm-vagrant-boxes
+c8o-vagrant-boxes
 =======================
 
-This is the repository for creating and building Vagrant boxes for PMM.
-
-The purpose of the project is to offer base boxes for all pmm projects that will be deployed on an Ubuntu environment
+The purpose of the project is to offer base Vagrant boxes for all pmm projects that will be deployed on an Ubuntu environment
 and that will use the Convertigo FullSync functionnality.
 
 For now, 2 base boxes are available:
@@ -22,9 +20,6 @@ Before building the box, you need some prerequisites:
 * Packer (Create machine images for multiple platforms from a single source configuration)
 * Vagrant (Configure reproducible and portable work environments)
 * VirtualBox (Virtualization)
-* Cntlm (local http proxy)
-
-> For a more detailed how-to on setting up a Vagrant environment, check the [pmm wiki](http://alm.sncf.fr/sources/pmm/starter-kit-pmm/wikis/home#config-vagrant)
 
 How to build the Vagrant box
 ----------------------------
