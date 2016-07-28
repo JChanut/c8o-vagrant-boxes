@@ -37,18 +37,10 @@ $ packer build pmm-template.json
 ```
 > It will adding the boxes to Vagrant and starting them with the `Vagrantfile` at the root of the repo
 
-Share the box to all pmm developpers
+How to use the boxes
 ------------------------------------
-Now, you must share the box to all the pmm developpers by simply deploying the boxes to the following web server:
 
-`http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/`
-
-To deploy the box on the http server, connect with winscp to the `10.105.132.141` machine with `jbossosmv` user and place the box file
-in the following directory:
-
-`/applis/jboss_as7/POC/config/standalone/deployments/ROOT.war/docs-caasm/pmm-vagrant-boxes`
-
-All pmm developpers can now create Vagrant environment for their projects by using the following configuration 
+Developpers can now create Vagrant environment for their projects by using the following configuration 
 in their `Vagrantfile`:
 
 ```ruby
