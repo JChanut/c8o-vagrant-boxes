@@ -9,13 +9,13 @@ Vagrant.configure("2") do |config|
   config.vbguest.auto_update = false
 
   config.vm.define "precise" do |precise|
-    precise.vm.box = "ddsim-pmm/ubuntu-12.04.4"
+    precise.vm.box = "jchanut/ubuntu-12.04.4"
     precise.vm.network "forwarded_port", guest: 5984, host: 5984
     precise.vm.network "forwarded_port", guest: 28080, host: 28080
   end
 
   config.vm.define "trusty" do |trusty|
-    trusty.vm.box = "ddsim-pmm/ubuntu-14.04.2"
+    trusty.vm.box = "jchanut/ubuntu-14.04.2"
     trusty.vm.network "forwarded_port", guest: 5984, host: 5985
     trusty.vm.network "forwarded_port", guest: 28080, host: 28081
   end

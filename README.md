@@ -25,7 +25,7 @@ How to build the Vagrant box
 ----------------------------
 Once you have clone the git repo and install Packer, launch the builds with the following command:
 ```sh
-$ packer build pmm-template.json
+$ packer build c8o-ubuntu.json
 ```
 > It will build the 2 boxes in the `build` directory
 
@@ -33,7 +33,7 @@ Testing the boxes locally
 -------------------------
 In order to test the 2 new boxes, you can launch the following script:
 ```sh
-$ packer build pmm-template.json
+$ ./local-deploy.sh
 ```
 > It will adding the boxes to Vagrant and starting them with the `Vagrantfile` at the root of the repo
 
@@ -46,11 +46,9 @@ in their `Vagrantfile`:
 ```ruby
 Vagrant.configure(2) do |config|
     # Use the following config for the Ubuntu 12.04 box
-    config.vm.box = "ddsim-pmm/ubuntu-12.04.4"
-    config.vm.box_url = "http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/ddsim-pmm-ubuntu-12.04.4_virtualbox.box"
+    config.vm.box = "jchanut/c8o-ubuntu-12.04.4"
 
     # Use the following config for the Ubuntu 14.04 box
-    config.vm.box = "ddsim-pmm/ubuntu-14.04.2"
-    config.vm.box_url = "http://10.105.132.141:8080/docs-caasm/pmm-vagrant-boxes/ddsim-pmm-ubuntu-14.04.2_virtualbox.box"
+    config.vm.box = "jchanut/c8o-ubuntu-14.04.2"
 end
 ```

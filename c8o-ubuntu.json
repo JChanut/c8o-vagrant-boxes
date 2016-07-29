@@ -1,6 +1,6 @@
 {
     "builders": [{
-        "name": "ddsim-pmm-ubuntu-14.04.2",
+        "name": "c8o-ubuntu-14.04.2",
         "type": "virtualbox-iso",
         "guest_os_type": "Ubuntu_64",
         "iso_url": "http://old-releases.ubuntu.com/releases/14.04.2/ubuntu-14.04.2-server-amd64.iso",
@@ -46,7 +46,7 @@
             ]
     },
     {
-        "name": "ddsim-pmm-ubuntu-12.04.4",
+        "name": "c8o-ubuntu-12.04.4",
         "type": "virtualbox-iso",
         "guest_os_type": "Ubuntu_64",
         "iso_url": "http://old-releases.ubuntu.com/releases/12.04.4/ubuntu-12.04.4-server-amd64.iso",
