@@ -1,7 +1,7 @@
 c8o-vagrant-boxes
 =======================
 
-The purpose of the project is to offer base Vagrant boxes for all pmm projects that will be deployed on an Ubuntu environment
+The purpose of the project is to offer base Vagrant boxes for all projects that will be deployed on an Ubuntu environment
 and that will use the Convertigo FullSync functionnality.
 
 For now, 2 base boxes are available:
